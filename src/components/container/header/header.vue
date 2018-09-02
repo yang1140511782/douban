@@ -20,6 +20,11 @@ export default {
     },
     created() {
         this.navbar = this.$store.state.navbar
+    },
+    methods: {
+        toHotMovie(){
+            this.$router.push('/film/hotMovie')
+        }
     }
 }
 </script>

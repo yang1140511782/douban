@@ -1,3 +1,5 @@
+@import './mixin.scss';
+
 body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, li, a, p, h1, h2, h3, h4,h5, h6, i, b, textarea, button, input, select, figure, figcaption, {
     padding: 0;
     margin: 0;
@@ -62,7 +64,7 @@ html,body{
 }
 
 .padding-18{
-    padding: 0 18px;
+    padding: 0 rem(18px);
 }
 
 .left {
@@ -79,4 +81,15 @@ html,body{
 
 .hide{
     display: none;
+}
+
+.h1{
+    font-size: rem(24px);
+    font-weight: normal;
+    box-sizing: border-box;
+    max-width: rem(660px);
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: rem(6px);
+    padding-left: 4%;
 }

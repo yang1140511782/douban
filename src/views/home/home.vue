@@ -17,7 +17,7 @@
                             <p>{{item.target.desc}}</p>
                         </div>
                         <div class="imgUrl">
-                            <img :src="item.target.cover_url">
+                            <img :src="item.target.cover_url" alt="loading">
                         </div>
                     </div>
                     <div class="feed-author">
@@ -43,6 +43,7 @@ export default {
             loading: false,
             next_date: new Date().getDate() + 1,
             dist: 20,
+            loading: false,
         }
     },
     created() {
@@ -52,25 +53,20 @@ export default {
     },
     methods: {
         loadMore() {
-            console.log('loader')
             this.loading = true;    //loading为true不会触发滚动     
             console.log(this.loading)       
             this.dateNow = this.format(this.next_date)
-            this.$http.get('/db/rexxar/api/v2/recommend_feed?', {
-                params: {
-                    alt: 'json',
-                    next_date: this.dateNow,
-                    loc_id: 108288,
-                    gender: '',
-                    birthday: '', 
-                    udid: '9fcefbf2acf1dfc991054ac40ca5114be7cd092f',
-                    for_mobile: 1,
-                }
-            }).then((res)=> {
+            let params = {
+                alt: 'json',
+                next_date: this.dateNow,
+                loc_id: 108288,
+                gender: '',
+                birthday: '', 
+                udid: '9fcefbf2acf1dfc991054ac40ca5114be7cd092f',
+                for_mobile: 1,
+            }
+            this.$api.douban.dbHome(params).then(res => {
                 this.recommend_feeds = this.recommend_feeds.concat(res.data.recommend_feeds)
-                setInterval(()=> {
-                    // this.loading = false;
-                }, 2000)
                 // this.loading = false;
                 // if(!this.loading){
                 //     this.next_date -= 1
@@ -78,11 +74,11 @@ export default {
                 //         this.next_date = 28;
                 //     }
                 // }
-            })    
+            })
         },
         // 进入详情页
         toDetail(id){
-            //  编程式导航，路由传参
+            //  编程式导航，路由传参，也可使用query传参，但是要以path匹配
             this.$router.push({name: 'listDetail', params: {id: id}})
         }
     }

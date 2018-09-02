@@ -1,3 +1,5 @@
+// import base from './src/api/base';
+let base = 'https://m.douban.com/'
 module.exports = {
     // 基本路径
     baseUrl: '/',
@@ -48,7 +50,7 @@ module.exports = {
         open: true,     //是否自动启动浏览器
         proxy: {
         '/db': {
-                target: 'https://m.douban.com/',
+                target: base,
                 ws: true,
                 pathRewrite: {
                     '^/db': ''
